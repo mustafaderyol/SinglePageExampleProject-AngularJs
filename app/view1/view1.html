@@ -1,0 +1,47 @@
+
+
+dataControllerParse: {{dataControllerParse}}
+
+
+<div ng-controller="PaginationCtrl" style="text-align: center">
+    <uib-pagination total-items="bigTotalItems" items-per-page="numPages" ng-model="bigCurrentPage" max-size="maxSize" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" force-ellipses="true"></uib-pagination>
+</div>
+
+<div class="panel panel-success" ng-repeat="adv in advertisements">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span class="text-left"><b>{{adv.sourceTitle}}</b></span>
+            <span style="float: right">( {{adv.sourceLocation}} )</span>
+            <br>
+            <h6>{{adv.emlakSource}} [ {{adv.sourceClassifiedID}} ]</h6>
+        </h3>
+
+    </div>
+    <div class="panel-body">
+        <table  class="table table-bordered">
+            <tr>
+                <td width="100"><b>sourceType</b></td>
+                <td width="50%">{{adv.sourceType}}</td>
+
+                <td width="100"><b>sourcePrice</b></td>
+                <td width="50%">{{adv.sourcePrice}} {{adv.sourceCurrency}}</td>
+            </tr>
+            <tr>
+                <td width="100"><b>sourceDescription</b></td>
+                <td colspan="3"><p ng-bind-html="to_trusted(adv.sourceDescription)"></p></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <span ng-repeat="image in adv.sourceImages">
+                        <img ng-src="{{image || 'None'}}"width="100" height="100" class="adrImage">
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <b>sourceClassifiedDate</b>: {{adv.sourceClassifiedDate}}
+        -
+        <b>sourceExpiryDate</b>: {{adv.sourceExpiryDate}}
+    </div>
+</div>
